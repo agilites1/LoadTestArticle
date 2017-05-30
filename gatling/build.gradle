@@ -1,0 +1,43 @@
+group 'LoadTest'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'scala'
+apply plugin: "com.github.lkishalmi.gatling"
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.com.github.lkishalmi.gradle:gradle-gatling-plugin:${gradleGatlingPlugin}"
+    }
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile "org.scala-lang:scala-library:${scalaVersion}"
+    gatling "com.google.code.gson:gson:${gsonVersion}"
+}
+
+gatling {
+    toolVersion = '2.2.4'
+    jvmArgs = ['-server', '-Xms512M', '-Xmx512M']
+}
+
+task(renameGatlingDirectory).doLast {
+    def report = {file -> file.isDirectory() && file.getName().startsWith('report')}
+    println ("Old path: " + new File("${buildDir}/reports/gatling").listFiles().join("\\n"))
+    def reportDirectory = new File("${buildDir}/reports/gatling").listFiles().toList()
+            .findAll(report)
+            .sort()
+            .last()
+
+    reportDirectory.renameTo("${buildDir}/reports/gatling/gatling-report")
+    println ("New path: ${buildDir}/reports/gatling/gatling-report")
+}

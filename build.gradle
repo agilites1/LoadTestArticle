@@ -1,0 +1,11 @@
+group 'LoadTest'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'base'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+}

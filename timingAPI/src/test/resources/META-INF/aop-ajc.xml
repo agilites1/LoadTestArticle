@@ -1,0 +1,11 @@
+<aspectj>
+    <weaver options="">
+        <include within="com.erpnext.Base.OnFailure" />
+        <include within="com.erpnext.Pages.LoginPage" />
+        <include within="com.erpnext.Pages.DeskPage" />
+        <include within="com.erpnext.Pages.SalesOrderPage" />
+        <include within="com.erpnext.Pages.DeliveryPage" />
+        <include within="com.erpnext.Pages.InvoicePage" />
+        <include within="com.erpnext.Base.AllureAttach"/>
+    </weaver>
+</aspectj>

@@ -1,0 +1,58 @@
+group 'LoadTest'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'groovy'
+apply plugin: 'ru.d10xa.allure'
+
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "ru.d10xa:gradle-allure-plugin:${gradleAllurePlugin}"
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    compile "org.codehaus.groovy:groovy-all:${groovyVersion}"
+    testCompile "org.testng:testng:${testngVersion}"
+    compile "com.codeborne:selenide:${selenideVersion}"
+    compile "com.google.inject:guice:${guiceVersion}"
+}
+
+allure {
+    aspectjweaver = true
+    junit = true
+    testNG = true
+    spock = false
+    geb = false
+
+    allureResultsDir = "$buildDir/allure-results"
+    allureReportDir = "$buildDir/allure-report"
+
+    allureVersion = "${allureVersion}"
+    aspectjVersion = "${aspectjVersion}"
+
+    clean = true
+}
+test {
+    useTestNG() {
+//        suiteXmlFiles << new File(rootDir, "testng.xml") //This is how to add custom testng.xml
+    }
+}
+
+task chrome(type: Test) {
+    systemProperties['selenide.browser'] = 'chrome'
+    useTestNG() {}
+}
+task firefox(type: Test) {
+    systemProperties['selenide.browser'] = 'marionette'
+    useTestNG() {}
+}
+task(copyChartJS).doLast {
+    new File("$buildDir/allure-report/data/Chart.bundle.js") << new File("${projectDir}/src/test/resources/Chart.bundle.js").text
+}

@@ -1,0 +1,215 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Table Style</title>
+    <meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
+</head>
+
+<body>
+<div class="table-title">
+</div>
+</body>
+<style type="text/css">
+	@import url(http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
+.spoiler {
+    display: inline-block;
+    margin: 5px;
+}
+a {
+    font-size: 11px;
+}
+.btn {
+    display: inline-block;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    padding: 10px 20px;
+    background: #558ed6;
+    color: #fff;
+    font-family: Tahoma, sans-serif;
+    cursor: pointer;
+}
+
+.spoiler input[type=checkbox] {
+    display: none;
+}
+
+.text {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 12px 0 20px;
+}
+
+.spoiler input[type=checkbox] ~ .text {
+    display: none;
+}
+
+.spoiler input[type=checkbox]:checked ~ .text {
+    display: block;
+}
+body {
+  background-color: #fafafa;
+  font-family: "Roboto", helvetica, arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+}
+
+div.table-title {
+   display: block;
+  margin: auto;
+  max-width: 600px;
+  padding:5px;
+  width: 100%;
+}
+
+.table-title h3 {
+   color: #fafafa;
+   font-size: 30px;
+   font-weight: 400;
+   font-style:normal;
+   font-family: "Roboto", helvetica, arial, sans-serif;
+   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+   text-transform:uppercase;
+}
+
+
+/*** Table Styles **/
+
+.table-fill {
+  background: white;
+  border-radius:3px;
+  border-collapse: collapse;
+  height: 10px;
+  margin: auto;
+  max-width: 90%;
+  padding:5px;
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  animation: float 5s infinite;
+}
+
+th {
+  color:#D5DDE5;;
+  background:#536790;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:16px;
+  font-weight: bold;
+  padding:10px;
+  text-align:left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;
+}
+
+th:first-child {
+  border-top-left-radius:3px;
+}
+
+th:last-child {
+  border-top-right-radius:3px;
+  border-right:none;
+}
+
+tr {
+  border-top: 1px solid #C1C3D1;
+  border-bottom-: 1px solid #C1C3D1;
+  color:#666B85;
+  font-size:16px;
+  font-weight:normal;
+  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+
+tr:hover td {
+  background:#d8c7d6;
+  color:#FFFFFF;
+  border-top: 1px solid #22262e;
+  border-bottom: 1px solid #22262e;
+}
+
+tr:first-child {
+  border-top:none;
+}
+
+tr:last-child {
+  border-bottom:none;
+}
+
+tr:nth-child(odd) td {
+  background:#EBEBEB;
+}
+
+tr:nth-child(odd):hover td {
+  background:#d8c7d6;
+}
+
+tr:last-child td:first-child {
+  border-bottom-left-radius:3px;
+}
+
+tr:last-child td:last-child {
+  border-bottom-right-radius:3px;
+}
+
+td {
+  background:#FFFFFF;
+  padding:20px;
+  text-align:left;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:14px;
+  border-right: 1px solid #C1C3D1;
+  max-width: 200;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+td:last-child {
+  border-right: 0px;
+}
+
+th.text-left {
+  text-align: left;
+}
+
+th.text-center {
+  text-align: center;
+}
+
+th.text-right {
+  text-align: right;
+}
+
+td.text-left {
+  text-align: left;
+}
+
+td.text-center {
+  text-align: center;
+}
+
+td.text-right {
+  text-align: right;
+}
+
+</style>
+<table style="width:100%">
+    <tr>
+        <th>URL</th>
+        <th>Duration (ms)</th>
+        <th>Entry Type</th>
+        <th>Transfer Size (byte)</th>
+    </tr>
+
+    <% topics.collect { topic -> %><tr>
+        <td><a href="<%= topic.name %>"><%= topic.name %></a></td>
+        <td><%= Integer.valueOf(topic.duration.intValue()) %></td>
+        <td><%= topic.entryType %></td>
+        <td><%= topic.transferSize %></td>
+    </tr><% } %>
+
+
+</table>
+</html>
