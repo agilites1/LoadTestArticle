@@ -10,10 +10,10 @@ Server side testing
 Client side testing
 
 
-### To run use gradle tasks:###
+### To run use gradle tasks: ###
 ##### Server Side: #####
 `gatlingRun-<Test_Name>`
 
-##### Server Side: #####
+##### Client Side: #####
 `chrome` or `firefox`
 
